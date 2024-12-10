@@ -1,0 +1,47 @@
+/* Block: session-chart */
+.session-chart {
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+
+  &__title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+		cursor: pointer;
+		&:hover {
+			background-color: #f0f0f0;
+		}
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__weekday {
+    font-weight: bold;
+    color: #007bff;
+  }
+
+  &__time {
+    font-size: 14px;
+    color: #555;
+  }
+}
