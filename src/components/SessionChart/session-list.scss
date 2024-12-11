@@ -19,16 +19,37 @@
     padding: 0;
   }
 
+  &__item--booked {
+    background-color: #d85a5a;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    & .session-chart__weekday {
+      font-weight: bold;
+      color: white;
+    }
+    &:hover {
+      background-color: #ee6666;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
   &__item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #eee;
-		cursor: pointer;
-		&:hover {
-			background-color: #f0f0f0;
-		}
+    cursor: pointer;
+    &:hover {
+      background-color: #f0f0f0;
+    }
 
     &:last-child {
       border-bottom: none;
@@ -42,6 +63,5 @@
 
   &__time {
     font-size: 14px;
-    color: #555;
   }
 }
