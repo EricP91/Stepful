@@ -5,7 +5,7 @@ import {
   Routes,
 } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import { CoachHome, Login } from "./pages";
+import { Home, Login } from "./pages";
 import "./App.css";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/home" element={<CoachHome />} />
+          <Route path="/home" element={<Home />} />
         </Route>
       </Routes>
     </Router>

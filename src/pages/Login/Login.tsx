@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../../apis";
 import "./login.scss";
 
-export const Login: React.FC = () => {
+const Login: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,10 +16,12 @@ export const Login: React.FC = () => {
     setError("");
     try {
       const response = await login(username, password);
+      const role_name = response.role_name;
+      console.log(username, role_name);
       if (response.token) {
         sessionStorage.setItem("token", response.token);
         sessionStorage.setItem("username", username);
-        navigate("/home", { state: { username } });
+        navigate("/home", { state: { username, role_name } });
       }
     } catch (error: any) {
       setError(error.response.data);
@@ -63,3 +65,5 @@ export const Login: React.FC = () => {
     </div>
   );
 };
+
+export default Login;

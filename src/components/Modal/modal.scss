@@ -26,8 +26,13 @@
     z-index: 1001;
     text-align: center;
   }
-
-  &__close {
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+  &__button {
     margin-top: 15px;
     padding: 10px 20px;
     font-size: 14px;
@@ -36,9 +41,17 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-
+    outline: none;
+    
     &:hover {
       background: #0056b3;
+    }
+  }
+  &__button--close {
+    background: #e85b30;
+    color: white;
+    &:hover {
+      background: #eb4816;
     }
   }
 }

@@ -4,10 +4,18 @@ import "./modal.scss"; // Import modal-specific styles
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onConfirm?: () => void;
+  confirmText?: string;
   content: React.ReactNode; // Content to display in the modal
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  content,
+  onConfirm,
+  confirmText,
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -15,9 +23,17 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
       <div className="modal__overlay" onClick={onClose}></div>
       <div className="modal__content">
         {content}
-        <button className="modal__close" onClick={onClose}>
-          Close
-        </button>
+
+        <div className="modal__actions">
+          {!!confirmText && (
+            <button className="modal__button" onClick={onConfirm}>
+              {confirmText}
+            </button>
+          )}
+          <button className="modal__button modal__button--close" onClick={onClose}>
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );

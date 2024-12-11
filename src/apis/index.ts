@@ -1,2 +1,7 @@
-export { login } from './user';
-export { scheduleSessionsByCoach, getScheduledSessionsByCoach, getSlotInfo } from './slots';
+export { login, getUsersByRole } from "./user";
+export {
+  scheduleSessionsByCoach,
+  getScheduledSessionsByCoach,
+  getSlotDetail,
+	bookSession,
+} from "./slots";

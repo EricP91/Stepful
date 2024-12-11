@@ -108,33 +108,3 @@ export const getSelectedSessions = (weekSlots: Session[][]) => {
   });
   return scheduledSlots;
 };
-
-const parseTimeToDate = (time: string) => {
-  const [hourMinute, period] = time.split(" ");
-  const [hours, minutes] = hourMinute.split(":").map(Number);
-  let hours24 = hours;
-
-  if (period === "PM" && hours !== 12) {
-    hours24 += 12;
-  } else if (period === "AM" && hours === 12) {
-    hours24 = 0;
-  }
-  return new Date(2000, 0, 1, hours24, minutes);
-}
-
-export const sortSlots = (slots: string[]) => {
-  const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-  slots.sort((prev, next) => {
-    const dayOrder =
-      weekdays.indexOf(prev.slice(0, 3)) - weekdays.indexOf(next.slice(0, 3));
-    if (dayOrder !== 0) {
-      return dayOrder;
-    }
-    const prevDate = parseTimeToDate(prev);
-    const nextDate = parseTimeToDate(next);
-
-    // Compare time values
-    return prevDate.getTime() - nextDate.getTime();
-  });
-  return slots;
-}
