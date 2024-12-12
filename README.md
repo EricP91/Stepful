@@ -1,50 +1,126 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+Here is a sample README.md file for the project:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Project Name**
+===============
 
-## Expanding the ESLint configuration
+**Coach Booking System**
+------------------------
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+**Overview**
+------------
 
-- Configure the top-level `parserOptions` property like this:
+The Coach Booking System is a web application designed to manage bookings for coaches. It allows coaches to view their schedules, book new sessions, and manage their clients.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+**Features**
+------------
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+* **Coach Dashboard**: View upcoming sessions and bookings
+* **Booking Management**: Book new sessions and manage existing bookings
+* **Client Management**: View and manage client information
+* **Session Management**: View and manage session details
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+**Getting Started**
+-------------------
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Prerequisites
+
+* Node.js (version 14 or higher)
+* npm (version 6 or higher)
+* TypeScript (version 4 or higher)
+
+### Installation
+
+1. Clone the repository: `git clone git@github.com:EricP91/Stepful-frontend.git`
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`
+
+### Build and Deployment
+
+1. Build the application: `npm run build`
+2. Deploy the application to your preferred hosting platform
+
+**API Documentation**
+---------------------
+
+The Coach Booking System API is documented using Swagger. You can access the API documentation by visiting `http://localhost:5000/api/docs` in your web browser.
+
+**Contributing**
+---------------
+
+Contributions are welcome! If you'd like to contribute to the project, please fork the repository and submit a pull request.
+
+**License**
+----------
+
+The Coach Booking System is licensed under the MIT License.
+
+**Authors**
+------------
+
+* [Your Name](https://github.com/your-username)
+
+**Acknowledgments**
+------------------
+
+* [List any acknowledgments or credits here]
+
+**Changelog**
+-------------
+
+* [List any changes or updates here]
+
+**Troubleshooting**
+------------------
+
+* [List any troubleshooting tips or common issues here]
+
+I hope this helps! Let me know if you have any questions or need further assistance.
+
+Here is a sample README.md file for the `src` directory:
+
+**src Directory**
+================
+
+This directory contains the source code for the Coach Booking System.
+
+**Subdirectories**
+-----------------
+
+* **components**: React components used throughout the application
+* **hooks**: Custom React hooks used throughout the application
+* **pages**: React pages used throughout the application
+* **apis**: API endpoints used throughout the application
+* **types**: TypeScript type definitions used throughout the application
+
+**Files**
+---------
+
+* **index.tsx**: The main entry point for the application
+* **App.tsx**: The main application component
+
+Here is a sample README.md file for the `components` directory:
+
+**Components Directory**
+=====================
+
+This directory contains React components used throughout the application.
+
+**Components**
+--------------
+
+* **CoachDashboard**: The coach dashboard component
+* **BookingForm**: The booking form component
+* **ClientList**: The client list component
+* **SessionList**: The session list component
+
+**Subdirectories**
+-----------------
+
+* **CoachDashboard**: The coach dashboard component directory
+* **BookingForm**: The booking form component directory
+* **ClientList**: The client list component directory
+* **SessionList**: The session list component directory
+
+I hope this helps! Let me know if you have any questions or need further assistance.
