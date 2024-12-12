@@ -1,0 +1,94 @@
+.weekly-calendar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+
+  &__header,
+  &__body {
+    display: flex;
+  }
+
+  &__body {
+    flex-direction: row;
+    position: relative;
+  }
+
+  &__header {
+    font-weight: bold;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+
+    & > div {
+      flex: 1;
+      width: 120px;
+      border-bottom: 1px solid #ddd;
+    }
+  }
+
+  &__day {
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+  }
+  &__day:nth-of-type(1) {
+    border-left: 1px solid #ddd;
+  }
+}
+
+.weekly-calendar__column {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  height: 640px;
+}
+
+.weekly-calendar__column:nth-of-type(1) {
+  border-left: 1px solid #ddd;
+}
+
+.weekly-calendar__slot {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: box;
+  background: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  flex: 1;
+}
+
+.weekly-calendar__booked {
+  position: absolute;
+  color: #fff;
+  opacity: 0.8;
+  width: 120px;
+  height: 160px;
+  border-bottom: 1px solid transparent;
+}
+
+.slot-end {
+  box-sizing: border-box;
+  border-bottom: 4px solid #f9f9f9;
+}
+
+.review__modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  gap: 10px;
+  p {
+    margin: 0px;
+  }
+  textarea {
+    width: 80%;
+    height: 100px;
+  }
+}
