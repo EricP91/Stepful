@@ -1,4 +1,4 @@
-export interface Session {
+export interface ISession {
   start: Date;
   end: Date;
   isSelected: boolean;
@@ -8,12 +8,12 @@ const getMinutesDifference = (date1: Date, date2: Date) => {
   return Math.abs((date2.getTime() - date1.getTime()) / (1000 * 60));
 };
 
-export const generateTimeSlots = (scheduledSlots: string[]): Session[][] => {
-  const weekSlots: Session[][] = [];
+export const generateTimeSlots = (scheduledSlots: string[]): ISession[][] => {
+  const weekSlots: ISession[][] = [];
   const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
   weekdays.forEach((day) => {
-    let daySlot: Session[] = [];
+    let daySlot: ISession[] = [];
     const start = new Date();
     start.setHours(9, 0, 0, 0);
 
@@ -46,7 +46,7 @@ export const generateTimeSlots = (scheduledSlots: string[]): Session[][] => {
 };
 
 export const removeSchedule = (
-  weekSlots: Session[][],
+  weekSlots: ISession[][],
   dayIndex: number,
   slotIndex: number
 ) => {
@@ -66,7 +66,7 @@ export const removeSchedule = (
 };
 
 export const selectSessions = (
-  weekSlots: Session[][],
+  weekSlots: ISession[][],
   dayIndex: number,
   slotIndex: number
 ) => {
@@ -89,7 +89,7 @@ export const selectSessions = (
   return weekSlots;
 };
 
-export const getSelectedSessions = (weekSlots: Session[][]) => {
+export const getSelectedSessions = (weekSlots: ISession[][]) => {
   const scheduledSlots: string[] = [];
   const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   weekSlots.forEach((day, dayIndex) => {

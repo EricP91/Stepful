@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import { Slot, SlotDetail } from "../../types/slots";
+import { ISlot, ISlotDetail } from "../../types/slots";
 import { getSlotDetail, leaveFeedback } from "../../apis";
 import Modal from "../Modal/Modal";
 import StarScore from "../StarScore/StarScore";
 import "./weekly-calendar.scss";
 
-interface WeeklyCalendarProps {
-  bookedSlots: Slot[];
+interface IWeeklyCalendarProps {
+  bookedSlots: ISlot[];
   colors: { [index: number]: string };
 }
 
-const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
+const WeeklyCalendar: React.FC<IWeeklyCalendarProps> = ({
   bookedSlots,
   colors,
 }) => {
   const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   const weekdayTitle = ["", "Mon", "Tue", "Wed", "Thu", "Fri"];
-  const [slotInfo, setSlotInfo] = useState<SlotDetail>();
+  const [slotInfo, setSlotInfo] = useState<ISlotDetail>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [score, setScore] = useState(0);
   const [notes, setNotes] = useState("");
@@ -29,7 +29,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
     return `${hour12.toString().padStart(2, "0")}:${minute} ${period}`;
   });
 
-  const handleSessionClick = async (slot: Slot) => {
+  const handleSessionClick = async (slot: ISlot) => {
     const result = await getSlotDetail(`${slot.coach_id}`, slot?.start_time);
     setSlotInfo(result);
     setNotes(result?.notes);

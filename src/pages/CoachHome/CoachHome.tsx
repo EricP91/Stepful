@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SessionList, Modal } from "../../components";
 import {
-  Session,
+  ISession,
   generateTimeSlots,
   selectSessions,
   getSelectedSessions,
@@ -11,19 +11,19 @@ import {
   getScheduledSessionsByCoach,
   getSlotDetail,
 } from "../../apis";
-import { Slot, SlotDetail } from "../../types/slots";
+import { ISlot, ISlotDetail } from "../../types/slots";
 import "./coach-home.scss";
 
-interface CoachHomeProps {
+interface ICoachHomeProps {
   username: string;
 }
 
-const CoachHome: React.FC<CoachHomeProps> = ({ username }) => {
-  const [weekSlots, setTimeSlots] = useState<Session[][]>([]);
+const CoachHome: React.FC<ICoachHomeProps> = ({ username }) => {
+  const [weekSlots, setTimeSlots] = useState<ISession[][]>([]);
   const [scheduledSlots, setScheduledSlots] = useState<string[]>([]);
-  const [sessionList, setSessionList] = useState<Slot[]>([]);
+  const [sessionList, setSessionList] = useState<ISlot[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [slotInfo, setSlotInfo] = useState<SlotDetail>();
+  const [slotInfo, setSlotInfo] = useState<ISlotDetail>();
   const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const CoachHome: React.FC<CoachHomeProps> = ({ username }) => {
   const fetchScheduledSessions = async () => {
     const result = await getScheduledSessionsByCoach(username);
     setSessionList(result.data);
-    const slots = result.data.map((slot: Slot) => slot.start_time);
+    const slots = result.data.map((slot: ISlot) => slot.start_time);
     updateSessions(slots);
   };
 

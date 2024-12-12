@@ -7,28 +7,28 @@ import {
   bookSession,
 } from "../../apis";
 import { SessionList, Modal, WeeklyCalendar } from "../../components";
-import { Slot, SlotDetail } from "../../types/slots";
+import { ISlot, ISlotDetail } from "../../types/slots";
 import "./student-home.scss";
 import { generateHexColors } from "../../utils/colorGenerate";
 
-interface StudentHomeProps {
+interface IStudentHomeProps {
   username: string;
 }
 
-interface Coach {
+interface ICoach {
   user_id: number;
   user_name: string;
 }
 
-const StudentHome: React.FC<StudentHomeProps> = ({ username }) => {
-  const [coaches, setCoaches] = useState<Coach[]>([]);
+const StudentHome: React.FC<IStudentHomeProps> = ({ username }) => {
+  const [coaches, setCoaches] = useState<ICoach[]>([]);
   const [currentSlots, setCurrentSlots] = useState<string[]>([]);
-  const [selectedCoach, setSelectedCoach] = useState<Coach>();
+  const [selectedCoach, setSelectedCoach] = useState<ICoach>();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [slotInfo, setSlotInfo] = useState<SlotDetail>();
+  const [slotInfo, setSlotInfo] = useState<ISlotDetail>();
   const [currentSessionIndex, setCurrentSessionIndex] = useState(0);
-  const [sessionList, setSessionList] = useState<Slot[]>([]);
-  const [studentScheduledSlots, setStudentScheduledSlots] = useState<Slot[]>(
+  const [sessionList, setSessionList] = useState<ISlot[]>([]);
+  const [studentScheduledSlots, setStudentScheduledSlots] = useState<ISlot[]>(
     []
   );
   const [colors, setColorMaps] = useState<{ [index: number]: string }>({});
@@ -47,7 +47,7 @@ const StudentHome: React.FC<StudentHomeProps> = ({ username }) => {
       setCoaches(coachList);
       const randomGeneratedColors = generateHexColors(coachList.length);
       const colorMap = coachList.reduce(
-        (acc: { [index: string]: string }, coach: Coach, index: number) => {
+        (acc: { [index: string]: string }, coach: ICoach, index: number) => {
           acc[coach.user_id] = randomGeneratedColors[index];
           return acc;
         },
@@ -67,7 +67,7 @@ const StudentHome: React.FC<StudentHomeProps> = ({ username }) => {
         selectedCoach?.user_name ?? ""
       );
       setSessionList(results.data);
-      const slots = results.data.map((slot: Slot) => slot.start_time);
+      const slots = results.data.map((slot: ISlot) => slot.start_time);
       setCurrentSlots(slots);
     } catch (error) {
       console.error("Error fetching slots:", error);

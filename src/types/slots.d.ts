@@ -1,4 +1,4 @@
-export interface Slot {
+export interface ISlot {
   id: number;
   coach_id: number;
   start_time: string;
@@ -6,7 +6,7 @@ export interface Slot {
   course_info?: string;
 }
 
-interface SlotDetail {
+interface ISlotDetail {
   id: number;
   notes: string;
   score: string;

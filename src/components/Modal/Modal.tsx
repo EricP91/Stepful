@@ -1,7 +1,7 @@
 import React from "react";
 import "./modal.scss"; // Import modal-specific styles
 
-interface ModalProps {
+interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm?: () => void;
@@ -9,7 +9,7 @@ interface ModalProps {
   content: React.ReactNode; // Content to display in the modal
 }
 
-const Modal: React.FC<ModalProps> = ({
+const Modal: React.FC<IModalProps> = ({
   isOpen,
   onClose,
   content,

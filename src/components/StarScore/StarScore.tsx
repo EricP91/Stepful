@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./star-score.scss";
 
-interface StarScoreProps {
+interface IStarScoreProps {
   maxStars?: number;
   initialScore?: number;
   disabled?: boolean;
   onScoreChange?: (score: number) => void;
 }
 
-const StarScore: React.FC<StarScoreProps> = ({
+const StarScore: React.FC<IStarScoreProps> = ({
   maxStars = 5,
   initialScore = 0,
   disabled = false,

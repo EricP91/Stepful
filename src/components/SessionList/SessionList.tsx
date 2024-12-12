@@ -1,15 +1,15 @@
 import React from "react";
-import { Slot } from "../../types/slots";
+import { ISlot } from "../../types/slots";
 import "./session-list.scss";
 
-interface SessionListProps {
+interface ISessionListProps {
   slots: string[];
-  sessionList: Slot[];
+  sessionList: ISlot[];
   highLightColor?: string;
   onSessionClick: (slot: string, index: number) => void;
 }
 
-const SessionList: React.FC<SessionListProps> = ({
+const SessionList: React.FC<ISessionListProps> = ({
   slots,
   onSessionClick,
   sessionList,
