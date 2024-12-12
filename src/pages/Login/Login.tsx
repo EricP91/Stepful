@@ -17,10 +17,10 @@ const Login: React.FC = () => {
     try {
       const response = await login(username, password);
       const role_name = response.role_name;
-      console.log(username, role_name);
+      const user_id = response.user_id;
       if (response.token) {
         sessionStorage.setItem("token", response.token);
-        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("userId", `${user_id}`);
         navigate("/home", { state: { username, role_name } });
       }
     } catch (error: any) {

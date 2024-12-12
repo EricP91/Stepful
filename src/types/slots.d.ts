@@ -7,9 +7,12 @@ export interface Slot {
 }
 
 interface SlotDetail {
+  id: number;
   notes: string;
-  satisfaction_score: string;
+  score: string;
   start_time: string;
   booked_by_name: string;
   user_name: string;
+  coach_phone_number: string;
+  student_phone_number: string;
 }
