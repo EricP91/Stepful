@@ -54,12 +54,16 @@ const StudentHome: React.FC<IStudentHomeProps> = ({ userName }) => {
         {}
       );
       setColorMaps(colorMap);
-      const scheduledSlots = await getBookedSessionByStudent(userName);
-      setStudentScheduledSlots(scheduledSlots.data);
+      fetchBookedSession();
     } catch (error) {
       console.error("Error fetching coaches:", error);
     }
   };
+
+  const fetchBookedSession = async () => {
+    const scheduledSlots = await getBookedSessionByStudent(userName);
+    setStudentScheduledSlots(scheduledSlots.data);
+  }
 
   const fetchSlots = async () => {
     try {
@@ -95,6 +99,7 @@ const StudentHome: React.FC<IStudentHomeProps> = ({ userName }) => {
     const currentSession = sessionList[currentSessionIndex];
     await bookSession(currentSession.slotId, userName);
     fetchSlots();
+    fetchBookedSession();
     setIsModalOpen(false);
   };
 
