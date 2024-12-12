@@ -1,8 +1,4 @@
-export interface ISession {
-  start: Date;
-  end: Date;
-  isSelected: boolean;
-}
+import { ISession } from "../types/slots";
 
 const getMinutesDifference = (date1: Date, date2: Date) => {
   return Math.abs((date2.getTime() - date1.getTime()) / (1000 * 60));

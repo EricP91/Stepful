@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { SessionList, Modal } from "../../components";
 import {
-  ISession,
   generateTimeSlots,
   selectSessions,
   getSelectedSessions,
@@ -11,7 +10,7 @@ import {
   getScheduledSessionsByCoach,
   getSlotDetail,
 } from "../../apis";
-import { ISlot, ISlotDetail } from "../../types/slots";
+import { ISlot, ISlotDetail, ISession } from "../../types/slots";
 import "./coach-home.scss";
 
 interface ICoachHomeProps {
@@ -160,7 +159,7 @@ const CoachHome: React.FC<ICoachHomeProps> = ({ username }) => {
                 <strong>Score:</strong> {slotInfo.score || "N/A"}
               </p>
               <p>
-                <strong>Notes:</strong> 
+                <strong>Notes:</strong>
                 {slotInfo.notes || "No notes available"}
               </p>
             </div>

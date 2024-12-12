@@ -47,17 +47,33 @@ const WeeklyCalendar: React.FC<IWeeklyCalendarProps> = ({
 
   const isPast = (slot: string) => {
     const currentDate = new Date();
-    if(currentDate.getDay() - 1 > weekdays.indexOf(slot.slice(0, 3))) return true;
+    if (currentDate.getDay() - 1 > weekdays.indexOf(slot.slice(0, 3)))
+      return true;
     const hours = currentDate.getHours();
     const minutes = currentDate.getMinutes();
 
     const period = hours >= 12 ? "PM" : "AM";
     const hour12 = hours % 12 || 12;
 
-    const formattedMinutes = minutes > 0 ? `30` : '00';
-    const currentTimeLabel = `${hour12}:${formattedMinutes} ${period}`;
+    const formattedMinutes = minutes > 0 ? `30` : "00";
+    const currentTimeLabel = `${hour12.toString().padStart(2, "0")}:${formattedMinutes} ${period}`;
 
     return timeRange.indexOf(currentTimeLabel) < timeRange.indexOf(slot);
+  };
+
+  const currentLineX = () => {
+    const currentDate = new Date();
+    const hours = currentDate.getHours();
+    const minutes = currentDate.getMinutes();
+
+    const period = hours >= 12 ? "PM" : "AM";
+    const hour12 = hours % 12 || 12;
+
+    const formattedMinutes = minutes > 0 ? `30` : "00";
+    const currentTimeLabel = `${hour12.toString().padStart(2, "0")}:${formattedMinutes} ${period}`;
+    const currentTimeIndex = timeRange.indexOf(currentTimeLabel);
+
+    return currentTimeIndex * 40 + (minutes % 30) * (40 / 30);
   };
 
   return (
@@ -95,22 +111,21 @@ const WeeklyCalendar: React.FC<IWeeklyCalendarProps> = ({
             })}
           </div>
         ))}
-
         {bookedSlots.map((slot) => {
           const weekday = slot.start_time.slice(0, 3);
           const slotTime = slot.start_time.slice(4);
           const weekIndex = weekdays.indexOf(weekday) + 1;
           const timeIndex = timeRange.indexOf(slotTime);
           const bgColor = colors[slot?.coach_id ?? 0];
-          const slotStyle: React.CSSProperties= {
+          const slotStyle: React.CSSProperties = {
             backgroundColor: bgColor,
             top: `${timeIndex * 40}px`,
             left: `${weekIndex * 120 + (weekIndex - 1) + 1}px`,
           };
-          if(isPast(slot.start_time)) {
+          if (isPast(slot.start_time)) {
             slotStyle.background = `repeating-linear-gradient(45deg,  ${bgColor}, ${bgColor} 2px, ${bgColor}50 2px, ${bgColor}50 5px)`;
           }
-          console.log(slotStyle);
+
           return (
             <div
               key={slot.id}
@@ -120,6 +135,10 @@ const WeeklyCalendar: React.FC<IWeeklyCalendarProps> = ({
             ></div>
           );
         })}
+        <div
+          className="weekly-calendar__current-line"
+          style={{ top: currentLineX() }}
+        ></div>
       </div>
       {slotInfo && (
         <Modal

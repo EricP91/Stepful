@@ -16,3 +16,10 @@ interface ISlotDetail {
   coach_phone_number: string;
   student_phone_number: string;
 }
+
+export interface ISession {
+  start: Date;
+  end: Date;
+  isSelected: boolean;
+}
+
