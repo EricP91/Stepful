@@ -56,7 +56,7 @@ $loading-spinner-size: 20px;
   }
 
   &__form {
-    @include flex(column, center, center);
+    @include flex(column, center, flex-start);
     gap: 15px;
   }
 

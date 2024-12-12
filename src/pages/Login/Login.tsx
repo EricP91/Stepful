@@ -7,7 +7,7 @@ const Login: React.FC = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [_, setError] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -24,7 +24,7 @@ const Login: React.FC = () => {
         navigate("/home", { state: { userName, roleName } });
       }
     } catch (error: any) {
-      setError(error.response.data);
+      setError("Invalid username or password");
     } finally {
       setLoading(false);
     }
@@ -57,6 +57,7 @@ const Login: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          {error && <p className="login__error">{error}</p>}
           <button className="login__button" type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </button>
