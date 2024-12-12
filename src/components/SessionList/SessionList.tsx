@@ -1,14 +1,20 @@
 import React from "react";
 import { Slot } from "../../types/slots";
-import './session-list.scss';
+import "./session-list.scss";
 
 interface SessionListProps {
   slots: string[];
   sessionList: Slot[];
+  highLightColor?: string;
   onSessionClick: (slot: string, index: number) => void;
 }
 
-const SessionList: React.FC<SessionListProps> = ({ slots, onSessionClick, sessionList }) => {
+const SessionList: React.FC<SessionListProps> = ({
+  slots,
+  onSessionClick,
+  sessionList,
+  highLightColor = "#ee6666",
+}) => {
   const calculateEndTime = (startTime: string): string => {
     const timeRegex = /(\d{1,2}):(\d{2}) (\w{2})/;
     const match = startTime.match(timeRegex);
@@ -39,7 +45,16 @@ const SessionList: React.FC<SessionListProps> = ({ slots, onSessionClick, sessio
           return (
             <li
               key={index}
-              className={`${sessionList[index].booked_by ? "session-chart__item--booked" : "session-chart__item"}`}
+              className={`${
+                sessionList[index].booked_by
+                  ? "session-chart__item--booked"
+                  : "session-chart__item"
+              }`}
+              style={{
+                backgroundColor: sessionList[index].booked_by
+                  ? highLightColor
+                  : "",
+              }}
               onClick={() => onSessionClick(slot, index)}
             >
               <span className="session-chart__weekday">{weekday}</span>
