@@ -1,7 +1,3 @@
-
-
-Here is a sample README.md file for the project:
-
 **Project Name**
 ===============
 
@@ -51,35 +47,6 @@ The Coach Booking System API is documented using Swagger. You can access the API
 
 Contributions are welcome! If you'd like to contribute to the project, please fork the repository and submit a pull request.
 
-**License**
-----------
-
-The Coach Booking System is licensed under the MIT License.
-
-**Authors**
-------------
-
-* [Your Name](https://github.com/your-username)
-
-**Acknowledgments**
-------------------
-
-* [List any acknowledgments or credits here]
-
-**Changelog**
--------------
-
-* [List any changes or updates here]
-
-**Troubleshooting**
-------------------
-
-* [List any troubleshooting tips or common issues here]
-
-I hope this helps! Let me know if you have any questions or need further assistance.
-
-Here is a sample README.md file for the `src` directory:
-
 **src Directory**
 ================
 
@@ -99,8 +66,6 @@ This directory contains the source code for the Coach Booking System.
 
 * **index.tsx**: The main entry point for the application
 * **App.tsx**: The main application component
-
-Here is a sample README.md file for the `components` directory:
 
 **Components Directory**
 =====================
