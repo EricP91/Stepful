@@ -15,23 +15,27 @@ export const scheduleSessionsByCoach = async (
   }
 };
 
-export const getScheduledSessionsByCoach = async (username: string) => {
+export const getScheduledSessionsByCoach = async (coach_name: string) => {
   try {
-    const response = await axios.get(`http://localhost:5000/slots/${username}`);
+    const response = await axios.get(
+      `http://localhost:5000/slots/${coach_name}`
+    );
     return response.data;
   } catch (error: any) {
     throw new Error(error.response.data);
   }
-}
+};
 
-export const getSlotDetail = async (username: string, slot: string) => {
+export const getSlotDetail = async (user_id: string, slot: string) => {
   try {
-    const response = await axios.get(`http://localhost:5000/slot?coachName=${username}&startTime=${slot}`);
+    const response = await axios.get(
+      `http://localhost:5000/slot?coachId=${user_id}&startTime=${slot}`
+    );
     return response.data;
   } catch (error: any) {
     throw new Error(error.response.data);
   }
-}
+};
 
 export const bookSession = async (slotId: number, username: string) => {
   try {
@@ -43,4 +47,32 @@ export const bookSession = async (slotId: number, username: string) => {
   } catch (error: any) {
     throw new Error(error.response.data);
   }
-}
+};
+
+export const getBookedSessionByStudent = async (student_name: string) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:5000/slots/booked/${student_name}`
+    );
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response.data);
+  }
+};
+
+export const leaveFeedback = async (
+  slotId: string,
+  score: number,
+  notes: string
+) => {
+  try {
+    const response = await axios.post(`http://localhost:5000/calls/feedback`, {
+      slot_id: slotId,
+      score,
+      notes,
+    });
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response.data);
+  }
+};
