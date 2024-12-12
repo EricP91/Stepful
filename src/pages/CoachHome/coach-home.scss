@@ -1,4 +1,36 @@
-/* Block: home */
+$primary-color: #007bff;
+$secondary-color: #ff6f00;
+$background-color: #f9f9f9;
+$text-color: #333;
+$border-radius: 5px;
+
+@mixin flex($direction: row, $justify: flex-start, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin button($background-color, $text-color, $border-radius) {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: $background-color;
+  color: $text-color;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($background-color, 10%);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+// Styles
 .coach-home {
   margin: 100px auto;
   font-family: Arial, sans-serif;
@@ -7,92 +39,56 @@
   &__title {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #333;
+    color: $text-color;
     position: absolute;
     top: 20px;
     left: 20px;
   }
 
   &__content {
-    display: flex;
-    flex: row;
-    justify-content: space-between;
+    @include flex(row, space-between, center);
     gap: 40px;
   }
 
   &__schedule-container {
-    display: flex;
-    flex-direction: column;
+    @include flex(column, center, center);
     gap: 10px;
+
     .schedule__button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #0056b3;
-      }
-
-      &:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-      }
+      @include button($primary-color, #fff, $border-radius);
     }
 
     .cancel__button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #ff6f00;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #eb5f18;
-      }
-
-      &:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-      }
+      @include button($secondary-color, #fff, $border-radius);
     }
   }
 
   &__schedule {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
+    @include flex(row, space-between, center);
     gap: 10px;
   }
 
   &__day-column {
     flex: 1;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    background-color: #f9f9f9;
+    @include flex(column, center, center);
+    background-color: $background-color;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: $border-radius;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
   &__day-title {
     font-size: 18px;
-    color: #007bff;
+    color: $primary-color;
     margin-bottom: 10px;
   }
 
   &__day-slots {
-    display: flex;
-    flex-direction: column;
+    @include flex(column, center, center);
     gap: 5px;
     width: 100%;
   }
+
   &__slot-button {
     width: 100%;
     margin: 5px 0;
@@ -101,17 +97,17 @@
     background-color: #71aae7;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: $border-radius;
     cursor: pointer;
     text-align: center;
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: darken(#71aae7, 10%);
     }
 
     &:active {
-      background-color: #003f8c;
+      background-color: darken(#71aae7, 20%);
     }
 
     &:disabled {
@@ -119,13 +115,14 @@
       cursor: not-allowed;
     }
   }
+
   &__slot-button-selected {
-    background-color: #0056b3;
+    background-color: $primary-color;
   }
 }
 
 .action__container {
-  display: flex;
+  @include flex(row, center, center);
   width: 100%;
   justify-content: center;
   flex-direction: row;

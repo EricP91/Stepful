@@ -1,39 +1,67 @@
-/* Block: session-chart */
+$session-chart-max-width: 600px;
+$session-chart-padding: 20px;
+$session-chart-border-color: #ccc;
+$session-chart-border-radius: 8px;
+$session-chart-background-color: #f9f9f9;
+$session-chart-font-family: Arial, sans-serif;
+
+$session-chart-title-font-size: 24px;
+$session-chart-title-margin-bottom: 10px;
+$session-chart-title-color: #333;
+
+$session-chart-list-padding: 0;
+
+$session-chart-item-padding: 10px;
+$session-chart-item-border-bottom-color: #eee;
+$session-chart-item-hover-opacity: 0.9;
+
+$session-chart-item-booked-color: white;
+$session-chart-item-booked-background-color: #ee6666; // use the same color as the highLightColor prop
+
+$session-chart-weekday-font-weight: bold;
+$session-chart-weekday-color: #007bff;
+
+$session-chart-time-font-size: 14px;
+
 .session-chart {
-  max-width: 600px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
+  max-width: $session-chart-max-width;
+  padding: $session-chart-padding;
+  border: 1px solid $session-chart-border-color;
+  border-radius: $session-chart-border-radius;
+  background-color: $session-chart-background-color;
+  font-family: $session-chart-font-family;
 
   &__title {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: $session-chart-title-font-size;
+    margin-bottom: $session-chart-title-margin-bottom;
     text-align: center;
-    color: #333;
+    color: $session-chart-title-color;
   }
 
   &__list {
     list-style: none;
-    padding: 0;
+    padding: $session-chart-list-padding;
   }
 
   &__item--booked {
-    color: white;
+    color: $session-chart-item-booked-color;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #eee;
+    padding: $session-chart-item-padding;
+    border-bottom: 1px solid $session-chart-item-border-bottom-color;
     cursor: pointer;
+    background-color: $session-chart-item-booked-background-color;
+
     & .session-chart__weekday {
-      font-weight: bold;
-      color: white;
+      font-weight: $session-chart-weekday-font-weight;
+      color: $session-chart-item-booked-color;
     }
+
     &:hover {
-      opacity: 0.8;
+      opacity: $session-chart-item-hover-opacity;
     }
+
     &:last-child {
       border-bottom: none;
     }
@@ -43,9 +71,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #eee;
+    padding: $session-chart-item-padding;
+    border-bottom: 1px solid $session-chart-item-border-bottom-color;
     cursor: pointer;
+
     &:hover {
       background-color: #f0f0f0;
     }
@@ -56,11 +85,11 @@
   }
 
   &__weekday {
-    font-weight: bold;
-    color: #007bff;
+    font-weight: $session-chart-weekday-font-weight;
+    color: $session-chart-weekday-color;
   }
 
   &__time {
-    font-size: 14px;
+    font-size: $session-chart-time-font-size;
   }
 }

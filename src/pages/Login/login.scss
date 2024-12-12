@@ -1,86 +1,100 @@
-// Container for the login form
-.login-container {
+$primary-color: #007bff;
+$secondary-color: #f4f4f4;
+$text-color: #333;
+$border-radius: 5px;
+$loading-spinner-size: 20px;
+
+@mixin flex($direction: row, $justify: flex-start, $align: center) {
   display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin button($background-color, $text-color, $border-radius) {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: $background-color;
+  color: $text-color;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($background-color, 10%);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+// Styles
+.login-container {
+  @include flex(column, center, center);
   width: 100vw;
   height: 100vh;
-  justify-content: center;
-  align-items: center;
-  background-color: #f4f4f4;
+  background-color: $secondary-color;
   position: relative;
-  /* Block: login */
-  .login {
-    max-width: 600px;
-    margin: auto;
-    font-family: Arial, sans-serif;
-    position: absolute;
-    top: 100px;
+}
 
-    &__title {
-      font-size: 24px;
-      margin-bottom: 20px;
-      text-align: center;
-      color: #333;
+.login {
+  max-width: 600px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  position: absolute;
+  top: 100px;
+
+  &__title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: $text-color;
+  }
+
+  &__form {
+    @include flex(column, center, center);
+    gap: 15px;
+  }
+
+  &__label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  &__input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    width: 500px;
+    &:focus {
+      border-color: $primary-color;
     }
+  }
 
-    &__form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+  &__button {
+    @include button($primary-color, #fff, $border-radius);
+  }
 
-    &__label {
-      font-weight: bold;
-      margin-bottom: 5px;
-      text-align: left;
-    }
-
-    &__input {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      outline: none;
-      width: 500px;
-      &:focus {
-        border-color: #007bff;
-      }
-    }
-
-    &__button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      
-      &:hover {
-        background-color: #0056b3;
-      }
-
-      &:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-      }
-    }
-
-    &__error {
-      color: red;
-      font-size: 14px;
-      margin-top: 10px;
-      text-align: center;
-    }
+  &__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
   }
 }
 
 .loading-spinner {
-  width: 20px; /* Width of the spinner */
-  height: 20px; /* Height of the spinner */
-  border: 3px solid #f3f3f3; /* Light gray border */
-  border-top: 3px solid #3498db; /* Blue border for the spinning effect */
-  border-radius: 50%; /* Makes it circular */
-  animation: spin 1s linear infinite; /* Spin animation */
+  width: $loading-spinner-size;
+  height: $loading-spinner-size;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {

@@ -1,4 +1,35 @@
-/* Block: student-home */
+$primary-color: #007bff;
+$secondary-color: #f4f4f4;
+$text-color: #333;
+$border-radius: 5px;
+
+@mixin flex($direction: row, $justify: flex-start, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin button($background-color, $text-color, $border-radius) {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: $background-color;
+  color: $text-color;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($background-color, 10%);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+// Styles
 .student-home {
   margin: 100px auto;
   font-family: Arial, sans-serif;
@@ -7,19 +38,18 @@
   &__title {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #333;
+    color: $text-color;
     position: absolute;
     top: 20px;
     left: 20px;
   }
+
   &__content {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    @include flex(row, center, center);
     flex-wrap: wrap;
     gap: 80px;
   }
+
   &__select-container {
     margin-bottom: 20px;
     display: flex;
@@ -37,7 +67,7 @@
     display: block;
     margin-bottom: 8px;
     font-size: 16px;
-    color: #333;
+    color: $text-color;
   }
 
   &__select {
@@ -49,7 +79,7 @@
     box-sizing: border-box;
 
     &:focus {
-      border-color: #007bff;
+      border-color: $primary-color;
       outline: none;
     }
   }
@@ -57,7 +87,7 @@
   &__coach-details {
     margin-top: 20px;
     padding: 10px;
-    border: 1px solid #007bff;
+    border: 1px solid $primary-color;
     border-radius: 4px;
     background-color: #e0f7fa;
 

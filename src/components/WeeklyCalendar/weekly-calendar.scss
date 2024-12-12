@@ -1,10 +1,33 @@
+$weekly-calendar-max-width: 1000px;
+$weekly-calendar-margin: 20px;
+$weekly-calendar-font-family: Arial, sans-serif;
+
+$weekly-calendar-header-background-color: #f9f9f9;
+$weekly-calendar-header-border-color: #ddd;
+
+$weekly-calendar-column-width: 120px;
+$weekly-calendar-column-border-color: #ddd;
+$weekly-calendar-column-border-width: 1px;
+
+$weekly-calendar-slot-height: 40px;
+$weekly-calendar-slot-background-color: #f9f9f9;
+$weekly-calendar-slot-border-color: #ddd;
+
+$weekly-calendar-booked-background-color: #007bff;
+$weekly-calendar-booked-opacity: 0.8;
+
+$weekly-calendar-review-modal-width: 500px;
+$weekly-calendar-review-modal-gap: 10px;
+
+$weekly-calendar-current-line-color: #db3627;
+
 .weekly-calendar {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1000px;
-  margin: 20px auto;
-  font-family: Arial, sans-serif;
+  max-width: $weekly-calendar-max-width;
+  margin: $weekly-calendar-margin auto;
+  font-family: $weekly-calendar-font-family;
 
   &__header,
   &__body {
@@ -19,76 +42,70 @@
   &__header {
     font-weight: bold;
     text-align: center;
-    background-color: #f9f9f9;
-    border-top: 1px solid #ddd;
+    background-color: $weekly-calendar-header-background-color;
+    border-top: 1px solid $weekly-calendar-header-border-color;
 
     & > div {
       flex: 1;
-      width: 120px;
-      border-bottom: 1px solid #ddd;
+      width: $weekly-calendar-column-width;
+      border-bottom: 1px solid $weekly-calendar-header-border-color;
     }
   }
 
-  &__day {
+  &__column {
+    display: flex;
+    flex-direction: column;
+    width: $weekly-calendar-column-width;
+    border-right: $weekly-calendar-column-border-width solid $weekly-calendar-column-border-color;
+    border-bottom: $weekly-calendar-column-border-width solid $weekly-calendar-column-border-color;
+    height: 640px;
+  }
+
+  &__column:nth-of-type(1) {
+    border-left: $weekly-calendar-column-border-width solid $weekly-calendar-column-border-color;
+  }
+
+  &__slot {
+    width: $weekly-calendar-column-width;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background: $weekly-calendar-slot-background-color;
+    border-bottom: $weekly-calendar-column-border-width solid $weekly-calendar-column-border-color;
     flex: 1;
-    border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+    height: $weekly-calendar-slot-height;
   }
-  &__day:nth-of-type(1) {
-    border-left: 1px solid #ddd;
+
+  &__booked {
+    position: absolute;
+    color: #fff;
+    opacity: $weekly-calendar-booked-opacity;
+    width: $weekly-calendar-column-width;
+    height: 160px;
+    border-bottom: $weekly-calendar-column-border-width solid transparent;
   }
-}
 
-.weekly-calendar__column {
-  display: flex;
-  flex-direction: column;
-  width: 120px;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  height: 640px;
-}
-
-.weekly-calendar__column:nth-of-type(1) {
-  border-left: 1px solid #ddd;
-}
-
-.weekly-calendar__slot {
-  width: 120px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: box;
-  background: #f9f9f9;
-  border-bottom: 1px solid #ddd;
-  flex: 1;
-}
-
-.weekly-calendar__booked {
-  position: absolute;
-  color: #fff;
-  opacity: 0.8;
-  width: 120px;
-  height: 160px;
-  border-bottom: 1px solid transparent;
-}
-
-.slot-end {
-  box-sizing: border-box;
-  border-bottom: 4px solid #f9f9f9;
-}
-
-.review__modal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 500px;
-  gap: 10px;
-  p {
-    margin: 0px;
+  &__review-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: $weekly-calendar-review-modal-width;
+    gap: $weekly-calendar-review-modal-gap;
+    p {
+      margin: 0px;
+    }
+    textarea {
+      width: 80%;
+      height: 100px;
+    }
   }
-  textarea {
-    width: 80%;
-    height: 100px;
+
+  &__current-line {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: $weekly-calendar-current-line-color;
   }
 }
