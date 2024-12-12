@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $primary-color: #007bff;
 $secondary-color: #f4f4f4;
 $text-color: #333;
@@ -21,7 +23,7 @@ $loading-spinner-size: 20px;
   cursor: pointer;
 
   &:hover {
-    background-color: darken($background-color, 10%);
+    background-color: color.adjust($background-color, $lightness: -10%); // Updated function
   }
 
   &:disabled {
