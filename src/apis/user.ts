@@ -23,3 +23,8 @@ export const getUsersByRole = async (roleName: string) => {
     throw new Error(error.response.data);
   }
 };
+
+export const logout = () => {
+  sessionStorage.removeItem("token");
+  sessionStorage.removeItem("userId");
+}

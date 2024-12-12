@@ -1,0 +1,11 @@
+.home {
+	display: flex;
+	flex-direction: column;
+	.button-logout {
+		position: absolute;
+		right: 40px;
+		top: 20px;
+		background-color: #c410e0;
+		color: white;
+	}
+}

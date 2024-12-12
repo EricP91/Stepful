@@ -1,4 +1,4 @@
-export { login, getUsersByRole } from "./user";
+export { login, logout, getUsersByRole } from "./user";
 export {
   scheduleSessionsByCoach,
   getScheduledSessionsByCoach,
