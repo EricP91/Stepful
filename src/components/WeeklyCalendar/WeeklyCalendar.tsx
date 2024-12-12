@@ -30,14 +30,14 @@ const WeeklyCalendar: React.FC<IWeeklyCalendarProps> = ({
   });
 
   const handleSessionClick = async (slot: ISlot) => {
-    const result = await getSlotDetail(`${slot.coach_id}`, slot?.start_time);
+    const result = await getSlotDetail(`${slot.coachId}`, slot?.startTime);
     setSlotInfo(result);
     setNotes(result?.notes);
     setIsModalOpen(true);
   };
 
   const handleReviewConfirm = async () => {
-    await leaveFeedback(`${slotInfo?.id ?? ""}`, score, notes);
+    await leaveFeedback(`${slotInfo?.slotId ?? ""}`, score, notes);
     setIsModalOpen(false);
   };
 
@@ -112,23 +112,23 @@ const WeeklyCalendar: React.FC<IWeeklyCalendarProps> = ({
           </div>
         ))}
         {bookedSlots.map((slot) => {
-          const weekday = slot.start_time.slice(0, 3);
-          const slotTime = slot.start_time.slice(4);
+          const weekday = slot.startTime.slice(0, 3);
+          const slotTime = slot.startTime.slice(4);
           const weekIndex = weekdays.indexOf(weekday) + 1;
           const timeIndex = timeRange.indexOf(slotTime);
-          const bgColor = colors[slot?.coach_id ?? 0];
+          const bgColor = colors[slot?.coachId ?? 0];
           const slotStyle: React.CSSProperties = {
             backgroundColor: bgColor,
             top: `${timeIndex * 40}px`,
             left: `${weekIndex * 120 + (weekIndex - 1) + 1}px`,
           };
-          if (isPast(slot.start_time)) {
+          if (isPast(slot.startTime)) {
             slotStyle.background = `repeating-linear-gradient(45deg,  ${bgColor}, ${bgColor} 2px, ${bgColor}50 2px, ${bgColor}50 5px)`;
           }
 
           return (
             <div
-              key={slot.id}
+              key={slot.slotId}
               className="weekly-calendar__booked"
               style={slotStyle}
               onClick={() => handleSessionClick(slot)}
@@ -151,28 +151,28 @@ const WeeklyCalendar: React.FC<IWeeklyCalendarProps> = ({
               <div className="review__modal">
                 <h3>Session Review</h3>
                 <p>
-                  <strong>Start Time:</strong> {slotInfo.start_time}
+                  <strong>Start Time:</strong> {slotInfo.startTime}
                 </p>
                 <div
                   style={{ display: "flex", flexDirection: "row", gap: "10px" }}
                 >
                   <p>
                     <strong>Booked By:</strong>{" "}
-                    {slotInfo.booked_by_name || "N/A"}
+                    {slotInfo.bookedByName || "N/A"}
                   </p>
                   <p>
-                    <strong>Coach:</strong> {slotInfo.user_name}
+                    <strong>Coach:</strong> {slotInfo.userName}
                   </p>
                 </div>
-                {!!slotInfo.booked_by_name && (
+                {!!slotInfo.bookedByName && (
                   <div>
                     <p>
                       <strong>Coach Contact:</strong>{" "}
-                      {slotInfo.coach_phone_number}
+                      {slotInfo.coachPhoneNumber}
                     </p>
                     <p>
                       <strong>Student Contact:</strong>{" "}
-                      {slotInfo.student_phone_number || "N/A"}
+                      {slotInfo.studentPhoneNumber || "N/A"}
                     </p>
                   </div>
                 )}

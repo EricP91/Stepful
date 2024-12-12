@@ -4,7 +4,7 @@ import { login } from "../../apis";
 import "./login.scss";
 
 const Login: React.FC = () => {
-  const [username, setUsername] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [_, setError] = useState("");
@@ -15,13 +15,13 @@ const Login: React.FC = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await login(username, password);
-      const role_name = response.role_name;
-      const user_id = response.user_id;
+      const response = await login(userName, password);
+      const roleName = response.roleName;
+      const userId = response.userId;
       if (response.token) {
         sessionStorage.setItem("token", response.token);
-        sessionStorage.setItem("userId", `${user_id}`);
-        navigate("/home", { state: { username, role_name } });
+        sessionStorage.setItem("userId", `${userId}`);
+        navigate("/home", { state: { userName, roleName } });
       }
     } catch (error: any) {
       setError(error.response.data);
@@ -42,8 +42,8 @@ const Login: React.FC = () => {
             className="login__input"
             type="text"
             id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
             required
           />
           <label className="login__label" htmlFor="password">

@@ -4,21 +4,21 @@ import StudentHome from "../StudentHome/StudentHome";
 
 const Home = () => {
   const location = useLocation();
-  const { username, role_name } = location.state as {
-    username: string;
-    role_name: string;
+  const { userName, roleName } = location.state as {
+    userName: string;
+    roleName: string;
   };
 
-  if (!role_name) {
+  if (!roleName) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      {role_name === "coach" ? (
-        <CoachHome username={username} />
+      {roleName === "coach" ? (
+        <CoachHome userName={userName} />
       ) : (
-        <StudentHome username={username} />
+        <StudentHome userName={userName} />
       )}
     </div>
   );

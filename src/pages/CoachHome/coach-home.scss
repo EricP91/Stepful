@@ -66,15 +66,16 @@ $border-radius: 5px;
   }
 
   &__schedule {
-    @include flex(row, space-between, center);
+    @include flex(row, space-between, flex-end);
     gap: 10px;
   }
 
   &__day-column {
     flex: 1;
-    @include flex(column, center, center);
+    @include flex(column, flex-start, center);
     background-color: $background-color;
     padding: 10px;
+    flex-direction: column-reverse;
     border-radius: $border-radius;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }

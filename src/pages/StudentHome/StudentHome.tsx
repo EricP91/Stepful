@@ -12,15 +12,15 @@ import "./student-home.scss";
 import { generateHexColors } from "../../utils/colorGenerate";
 
 interface IStudentHomeProps {
-  username: string;
+  userName: string;
 }
 
 interface ICoach {
-  user_id: number;
-  user_name: string;
+  userId: number;
+  userName: string;
 }
 
-const StudentHome: React.FC<IStudentHomeProps> = ({ username }) => {
+const StudentHome: React.FC<IStudentHomeProps> = ({ userName }) => {
   const [coaches, setCoaches] = useState<ICoach[]>([]);
   const [currentSlots, setCurrentSlots] = useState<string[]>([]);
   const [selectedCoach, setSelectedCoach] = useState<ICoach>();
@@ -48,13 +48,13 @@ const StudentHome: React.FC<IStudentHomeProps> = ({ username }) => {
       const randomGeneratedColors = generateHexColors(coachList.length);
       const colorMap = coachList.reduce(
         (acc: { [index: string]: string }, coach: ICoach, index: number) => {
-          acc[coach.user_id] = randomGeneratedColors[index];
+          acc[coach.userId] = randomGeneratedColors[index];
           return acc;
         },
         {}
       );
       setColorMaps(colorMap);
-      const scheduledSlots = await getBookedSessionByStudent(username);
+      const scheduledSlots = await getBookedSessionByStudent(userName);
       setStudentScheduledSlots(scheduledSlots.data);
     } catch (error) {
       console.error("Error fetching coaches:", error);
@@ -64,10 +64,10 @@ const StudentHome: React.FC<IStudentHomeProps> = ({ username }) => {
   const fetchSlots = async () => {
     try {
       const results = await getScheduledSessionsByCoach(
-        selectedCoach?.user_name ?? ""
+        selectedCoach?.userName ?? ""
       );
       setSessionList(results.data);
-      const slots = results.data.map((slot: ISlot) => slot.start_time);
+      const slots = results.data.map((slot: ISlot) => slot.startTime);
       setCurrentSlots(slots);
     } catch (error) {
       console.error("Error fetching slots:", error);
@@ -76,7 +76,7 @@ const StudentHome: React.FC<IStudentHomeProps> = ({ username }) => {
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = parseInt(e.target.value, 10);
-    const coach = coaches.find((c) => +c.user_id === selectedId);
+    const coach = coaches.find((c) => +c.userId === selectedId);
     setSelectedCoach(coach);
   };
 
@@ -87,20 +87,20 @@ const StudentHome: React.FC<IStudentHomeProps> = ({ username }) => {
   };
 
   const fetchSlotInfo = async (slot: string) => {
-    const result = await getSlotDetail(`${selectedCoach?.user_id}`, slot);
+    const result = await getSlotDetail(`${selectedCoach?.userId}`, slot);
     setSlotInfo(result);
   };
 
   const handleConfirmBook = async () => {
     const currentSession = sessionList[currentSessionIndex];
-    await bookSession(currentSession.id, username);
+    await bookSession(currentSession.slotId, userName);
     fetchSlots();
     setIsModalOpen(false);
   };
 
   return (
     <div className="student-home">
-      <h2 className="student-home__title">Welcome {username}!</h2>
+      <h2 className="student-home__title">Welcome {userName}!</h2>
       <div className="student-home__content">
         <div className="student-home__select-container">
           <div className="student-home__select-input">
@@ -117,8 +117,8 @@ const StudentHome: React.FC<IStudentHomeProps> = ({ username }) => {
                 Choose a coach
               </option>
               {coaches.map((coach) => (
-                <option key={coach.user_id} value={coach.user_id}>
-                  {coach.user_name}
+                <option key={coach.userId} value={coach.userId}>
+                  {coach.userName}
                 </option>
               ))}
             </select>
@@ -128,7 +128,7 @@ const StudentHome: React.FC<IStudentHomeProps> = ({ username }) => {
               slots={currentSlots}
               sessionList={sessionList}
               onSessionClick={handleSessionItemClick}
-              highLightColor={colors[selectedCoach?.user_id ?? 0]}
+              highLightColor={colors[selectedCoach?.userId ?? 0]}
             />
           )}
         </div>
@@ -141,31 +141,31 @@ const StudentHome: React.FC<IStudentHomeProps> = ({ username }) => {
             onClose={() => setIsModalOpen(false)}
             onConfirm={handleConfirmBook}
             confirmText={
-              sessionList[currentSessionIndex].booked_by ? "" : "Schedule"
+              sessionList[currentSessionIndex].bookedBy ? "" : "Schedule"
             }
             content={
               slotInfo ? (
                 <div>
                   <h3>Session Details</h3>
                   <p>
-                    <strong>Start Time:</strong> {slotInfo.start_time}
+                    <strong>Start Time:</strong> {slotInfo.startTime}
                   </p>
                   <p>
                     <strong>Booked By:</strong>{" "}
-                    {slotInfo.booked_by_name || "N/A"}
+                    {slotInfo.bookedByName || "N/A"}
                   </p>
                   <p>
-                    <strong>Coach:</strong> {slotInfo.user_name}
+                    <strong>Coach:</strong> {slotInfo.userName}
                   </p>
-                  {!!slotInfo.booked_by_name && (
+                  {!!slotInfo.bookedByName && (
                     <div>
                       <p>
                         <strong>Coach Contact:</strong>{" "}
-                        {slotInfo.coach_phone_number}
+                        {slotInfo.coachPhoneNumber}
                       </p>
                       <p>
                         <strong>Student Contact:</strong>{" "}
-                        {slotInfo.student_phone_number || "N/A"}
+                        {slotInfo.studentPhoneNumber || "N/A"}
                       </p>
                     </div>
                   )}

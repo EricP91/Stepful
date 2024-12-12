@@ -3,12 +3,12 @@ import axios from "axios";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const scheduleSessionsByCoach = async (
-  username: string,
+  userName: string,
   scheduledSlots: string[]
 ) => {
   try {
     const response = await axios.post(`${API_URL}/slots`, {
-      user_name: username,
+      userName,
       slots: scheduledSlots,
     });
     return response.data;
@@ -17,19 +17,19 @@ export const scheduleSessionsByCoach = async (
   }
 };
 
-export const getScheduledSessionsByCoach = async (coach_name: string) => {
+export const getScheduledSessionsByCoach = async (coachName: string) => {
   try {
-    const response = await axios.get(`${API_URL}/slots/${coach_name}`);
+    const response = await axios.get(`${API_URL}/slots/${coachName}`);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response.data);
   }
 };
 
-export const getSlotDetail = async (user_id: string, slot: string) => {
+export const getSlotDetail = async (userId: string, slot: string) => {
   try {
     const response = await axios.get(
-      `${API_URL}/slot?coachId=${user_id}&startTime=${slot}`
+      `${API_URL}/slot?coachId=${userId}&startTime=${slot}`
     );
     return response.data;
   } catch (error: any) {
@@ -37,11 +37,12 @@ export const getSlotDetail = async (user_id: string, slot: string) => {
   }
 };
 
-export const bookSession = async (slotId: number, username: string) => {
+export const bookSession = async (slotId: number, userName: string) => {
   try {
+    console.log(slotId, userName);
     const response = await axios.post(`${API_URL}/slots/book`, {
-      user_name: username,
-      slot_id: slotId,
+      userName,
+      slotId,
     });
     return response.data;
   } catch (error: any) {
@@ -49,9 +50,9 @@ export const bookSession = async (slotId: number, username: string) => {
   }
 };
 
-export const getBookedSessionByStudent = async (student_name: string) => {
+export const getBookedSessionByStudent = async (studentName: string) => {
   try {
-    const response = await axios.get(`${API_URL}/slots/booked/${student_name}`);
+    const response = await axios.get(`${API_URL}/slots/booked/${studentName}`);
     return response.data;
   } catch (error: any) {
     throw new Error(error.response.data);
@@ -65,7 +66,7 @@ export const leaveFeedback = async (
 ) => {
   try {
     const response = await axios.post(`${API_URL}/calls/feedback`, {
-      slot_id: slotId,
+      slotId,
       score,
       notes,
     });

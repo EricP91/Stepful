@@ -46,12 +46,12 @@ const SessionList: React.FC<ISessionListProps> = ({
             <li
               key={index}
               className={`${
-                sessionList[index].booked_by
+                sessionList[index].bookedBy
                   ? "session-chart__item--booked"
                   : "session-chart__item"
               }`}
               style={{
-                backgroundColor: sessionList[index].booked_by
+                backgroundColor: sessionList[index].bookedBy
                   ? highLightColor
                   : "",
               }}

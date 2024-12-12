@@ -1,20 +1,20 @@
 export interface ISlot {
-  id: number;
-  coach_id: number;
-  start_time: string;
-  booked_by?: number;
-  course_info?: string;
+  slotId: number;
+  coachId: number;
+  startTime: string;
+  bookedBy?: number;
+  courseInfo?: string;
 }
 
 interface ISlotDetail {
-  id: number;
+  slotId: number;
   notes: string;
   score: string;
-  start_time: string;
-  booked_by_name: string;
-  user_name: string;
-  coach_phone_number: string;
-  student_phone_number: string;
+  startTime: string;
+  bookedByName: string;
+  userName: string;
+  coachPhoneNumber: string;
+  studentPhoneNumber: string;
 }
 
 export interface ISession {
@@ -23,3 +23,9 @@ export interface ISession {
   isSelected: boolean;
 }
 
+export interface ILoginResponse {
+  token: string;
+  message: string;
+  userId: number;
+  roleName: string;
+}

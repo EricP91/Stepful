@@ -1,34 +1,23 @@
 import axios from "axios";
-
-export interface LoginResponse {
-  token: string;
-  message: string;
-  user_id: number;
-  role_name: string;
-}
+import { ILoginResponse } from "../types/slots";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const login = async (username: string, password: string) => {
+export const login = async (userName: string, password: string) => {
   try {
-    const response = await axios.post<LoginResponse>(
-      `${API_URL}/auth/login`,
-      {
-        username,
-        password,
-      }
-    );
+    const response = await axios.post<ILoginResponse>(`${API_URL}/auth/login`, {
+      userName,
+      password,
+    });
     return response.data;
   } catch (error: any) {
     throw new Error(error.response.data);
   }
 };
 
-export const getUsersByRole = async (role_name: string) => {
+export const getUsersByRole = async (roleName: string) => {
   try {
-    const response = await axios.get(
-      `${API_URL}/users/${role_name}`
-    );
+    const response = await axios.get(`${API_URL}/users/${roleName}`);
     return response.data.users;
   } catch (error: any) {
     throw new Error(error.response.data);
