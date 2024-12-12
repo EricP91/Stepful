@@ -42,6 +42,25 @@
         cursor: not-allowed;
       }
     }
+
+    .cancel__button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff6f00;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #eb5f18;
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    }
   }
 
   &__schedule {
@@ -103,4 +122,13 @@
   &__slot-button-selected {
     background-color: #0056b3;
   }
+}
+
+.action__container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 20px;
 }

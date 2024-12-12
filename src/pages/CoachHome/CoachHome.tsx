@@ -25,7 +25,7 @@ const CoachHome: React.FC<CoachHomeProps> = ({ username }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [slotInfo, setSlotInfo] = useState<SlotDetail>();
   const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-  
+
   useEffect(() => {
     fetchScheduledSessions();
   }, []);
@@ -44,8 +44,18 @@ const CoachHome: React.FC<CoachHomeProps> = ({ username }) => {
 
   const handleScheduleSessions = async () => {
     const selectedSlots: string[] = getSelectedSessions(weekSlots);
-     await scheduleSessionsByCoach(username, selectedSlots);
+    await scheduleSessionsByCoach(username, selectedSlots);
     fetchScheduledSessions();
+  };
+
+  const handleRemoveSelection = () => {
+    const removeSelection = weekSlots.map((day) => {
+      return day.map((slot) => {
+        slot.isSelected = false;
+        return slot;
+      });
+    });
+    setTimeSlots(removeSelection);
   };
 
   const updateSessions = (slots: string[]) => {
@@ -60,8 +70,8 @@ const CoachHome: React.FC<CoachHomeProps> = ({ username }) => {
   };
 
   const fetchSlotDetail = async (slot: string) => {
-    const username = sessionStorage.getItem("username");
-    const result = await getSlotDetail(username ?? "", slot);
+    const userId = sessionStorage.getItem("userId");
+    const result = await getSlotDetail(userId ?? "", slot);
     setSlotInfo(result);
   };
 
@@ -69,7 +79,11 @@ const CoachHome: React.FC<CoachHomeProps> = ({ username }) => {
     <div className="coach-home">
       <h1 className="coach-home__title">Welcome {username}!</h1>
       <div className="coach-home__content">
-        <SessionList slots={scheduledSlots} onSessionClick={handleSessionItemClick} sessionList={sessionList}/>
+        <SessionList
+          slots={scheduledSlots}
+          onSessionClick={handleSessionItemClick}
+          sessionList={sessionList}
+        />
         <div className="coach-home__schedule-container">
           <div className="coach-home__schedule">
             {weekdays.map((day, dayIndex) => (
@@ -100,9 +114,17 @@ const CoachHome: React.FC<CoachHomeProps> = ({ username }) => {
               </div>
             ))}
           </div>
-          <button className="schedule__button" onClick={handleScheduleSessions}>
-            Schedule Sessions
-          </button>
+          <div className="action__container">
+            <button
+              className="schedule__button"
+              onClick={handleScheduleSessions}
+            >
+              Schedule Sessions
+            </button>
+            <button className="cancel__button" onClick={handleRemoveSelection}>
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
 
@@ -122,12 +144,24 @@ const CoachHome: React.FC<CoachHomeProps> = ({ username }) => {
               <p>
                 <strong>Coach:</strong> {slotInfo.user_name}
               </p>
+              {!!slotInfo.booked_by_name && (
+                <div>
+                  <p>
+                    <strong>Coach Contact:</strong>{" "}
+                    {slotInfo.coach_phone_number}
+                  </p>
+                  <p>
+                    <strong>Student Contact:</strong>{" "}
+                    {slotInfo.student_phone_number || "N/A"}
+                  </p>
+                </div>
+              )}
               <p>
-                <strong>Satisfaction Score:</strong>{" "}
-                {slotInfo.satisfaction_score || "N/A"}
+                <strong>Score:</strong> {slotInfo.score || "N/A"}
               </p>
               <p>
-                <strong>Notes:</strong> {slotInfo.notes || "No notes available"}
+                <strong>Notes:</strong> 
+                {slotInfo.notes || "No notes available"}
               </p>
             </div>
           ) : (
